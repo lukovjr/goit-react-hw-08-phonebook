@@ -1,8 +1,9 @@
-import { Input, FormBtn } from './Forma.styled';
+import { Input } from './Forma.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix';
-import { addContactsThunk } from 'redux/operations';
+import { addContacts } from 'redux/contacts/operations';
+import { Button } from '@chakra-ui/react';
 
 export const Forma = () => {
   const contacts = useSelector(state => state.contacts.items);
@@ -23,7 +24,8 @@ export const Forma = () => {
       Notify.info(`${contact.name} is in your contacts`);
       return;
     }
-    dispatch(addContactsThunk(contact));
+    dispatch(addContacts(contact)).unwrap();
+    Notify.success(`Contact is added`);;
     e.target.reset();
   };
 
@@ -54,7 +56,7 @@ export const Forma = () => {
           id={numberInputId}
         />
         </label>
-        <FormBtn type="submit">Add contact</FormBtn>
+        <Button marginBottom={5} type="submit">Add contact</Button>
       </form>
     </>
   );

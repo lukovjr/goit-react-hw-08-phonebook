@@ -13,6 +13,7 @@ export const Input = styled.input`
 
 export const FormBtn = styled.button`
   margin-top: 10px;
+  margin-bottom: 20px;
   font-size: 18px;
   padding: 10px;
   border-radius: 5px;

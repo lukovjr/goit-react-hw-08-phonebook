@@ -1,40 +1,38 @@
-import { deleteContactsThunk, getContactsThunk } from 'redux/operations';
-import { ContactsListEl, ContactsList, ContactsBtn } from './Contacts.styled';
+import { deleteContact } from 'redux/contacts/operations';
+import { ContactsListEl, ContactsList } from './Contacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { Loader } from 'components/Loader';
+import { Notify } from 'notiflix';
+import { Button } from '@chakra-ui/react';
 
-export const Contacts = () => {
+export const Contacts = ({name}) => {
   const contactsValue = useSelector(state => state.contacts.items);
-  const filterValue = useSelector(state => state.filter);
+  const filterValue = useSelector(state => state.filters.filter);
   const isLoading = useSelector(state => state.contacts.isLoading);
   const dispatch = useDispatch();
   console.log(contactsValue);
   console.log(filterValue);
 
-  useEffect(() => {
-    dispatch(getContactsThunk());
-  }, [dispatch]);
-
+  
   const delContact = contactId => {
-    dispatch(deleteContactsThunk(contactId));
+    dispatch(deleteContact(contactId)).unwrap();
+    Notify.success(`Contact was deleted`);
   };
 
   const getVisibleContacts = contactsValue.filter(({ name }) =>
-      name.toLowerCase().includes(filterValue.toLowerCase())
+      name.toLowerCase().includes(filterValue)
     );
 
   return (
     <>
     {isLoading && <p>Loading...</p>}
-      <ContactsList>
+      <ContactsList >
         {getVisibleContacts.map(el => {
           return (
-            <ContactsListEl key={el.id}>
-              {el.name} <span>{el.phone}</span>
-              <ContactsBtn type="button" disabled = {isLoading} onClick={() => delContact(el.id)}>
-              {isLoading? <Loader/> : 'Delete'}
-              </ContactsBtn>
+            <ContactsListEl  key={el.id}>
+              {el.name} <span>{el.number }</span>
+              <Button type="button" isDisabled = {isLoading} isLoading = {isLoading} onClick={() => delContact(el.id)}>
+               Delete
+              </Button>
             </ContactsListEl>
           );
         })}
@@ -42,3 +40,4 @@ export const Contacts = () => {
     </>
   );
 };
+
