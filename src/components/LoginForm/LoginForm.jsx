@@ -6,8 +6,7 @@ import { Notify } from 'notiflix';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
-
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -34,7 +33,7 @@ export const LoginForm = () => {
         Password
         <Input type="password" name="password" size={'md'} width={'500px'} borderColor={'#56bd77'}/>
       </label>
-      <Button colorScheme='whatsapp' marginTop={5} type="submit" size={'md'}>Log In</Button>
+      <Button  colorScheme='whatsapp' marginTop={5} type="submit" size={'md'}>Log In</Button>
     </form>
     </Grid>
     );

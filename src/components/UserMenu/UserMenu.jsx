@@ -7,6 +7,7 @@ export const UserMenu = () => {
   const userName = useSelector(state => state.auth.user.name)
   const dispatch = useDispatch()
   
+  
 const handleLogOut =() => {
 dispatch(logOut())
 
@@ -16,7 +17,7 @@ dispatch(logOut())
   return (
     <LogOutDiv>
       <p>{userName}</p>
-      <Button colorScheme='blue' onClick={handleLogOut}>Logout</Button>
+      <Button  colorScheme='blue' onClick={handleLogOut}>Logout</Button>
     </LogOutDiv>
   );
 };

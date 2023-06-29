@@ -7,7 +7,6 @@ import { Notify } from 'notiflix';
 export const RegisterForm = () => {
   const dispatch = useDispatch();
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;

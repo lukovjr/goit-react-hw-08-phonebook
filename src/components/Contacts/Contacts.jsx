@@ -4,14 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix';
 import { Button } from '@chakra-ui/react';
 
-export const Contacts = ({name}) => {
+export const Contacts = ({id}) => {
   const contactsValue = useSelector(state => state.contacts.items);
   const filterValue = useSelector(state => state.filters.filter);
   const isLoading = useSelector(state => state.contacts.isLoading);
   const dispatch = useDispatch();
   console.log(contactsValue);
   console.log(filterValue);
-
   
   const delContact = contactId => {
     dispatch(deleteContact(contactId)).unwrap();
@@ -30,8 +29,8 @@ export const Contacts = ({name}) => {
           return (
             <ContactsListEl  key={el.id}>
               {el.name} <span>{el.number }</span>
-              <Button type="button" isDisabled = {isLoading} isLoading = {isLoading} onClick={() => delContact(el.id)}>
-               Delete
+              <Button type="button"  onClick={() => delContact(el.id)}>
+              Delete
               </Button>
             </ContactsListEl>
           );

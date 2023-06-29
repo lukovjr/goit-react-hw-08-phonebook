@@ -1,5 +1,5 @@
 import { lazy, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser } from 'redux/auth/operations';
@@ -46,6 +46,7 @@ export const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contacts" element={<Contacts />} />
+        <Route path="*" element={<Navigate to={'/login'} />} />
       </Route>
     </Routes>
   );
