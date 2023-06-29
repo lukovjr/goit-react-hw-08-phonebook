@@ -2,25 +2,22 @@ import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
 import { Grid, Input } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react';
-import { Notify } from 'notiflix';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
   
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    try {
-        await dispatch(logIn({
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    dispatch(
+      logIn({
         email: form.elements.email.value,
         password: form.elements.password.value,
-    })).unwrap();
-        Notify.success(`Welcome, ${form.elements.email.value}`);
-        form.reset();
-    } catch (error) {
-       Notify.error('Login error. Please enter correct data')
-    }
-};
+      })
+    );
+    form.reset();
+  };
 
   return (
     <Grid templateColumns='repeat(5, 1fr)' gap={6}>

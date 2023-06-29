@@ -2,26 +2,22 @@ import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
 import { Grid, Input } from '@chakra-ui/react';
 import { Button } from '@chakra-ui/react';
-import { Notify } from 'notiflix';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    try {
-        await dispatch(register({
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    dispatch(
+      register({
         name: form.elements.name.value,
         email: form.elements.email.value,
         password: form.elements.password.value,
-        })).unwrap();
-        form.reset();
-        Notify.success('Congrats! You have been registred');
-    } catch (error) {
-        Notify.error('User with this data is already exist')
-    }
-};
+      })
+    );
+    form.reset();
+  };
 
 
   return (

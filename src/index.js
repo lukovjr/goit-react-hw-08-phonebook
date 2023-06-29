@@ -7,6 +7,7 @@ import { persistor, store } from 'redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
+import { Toaster } from 'react-hot-toast';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -19,5 +20,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </BrowserRouter>
       </PersistGate>   
     </Provider>
+    <Toaster />
   </React.StrictMode>
 );
